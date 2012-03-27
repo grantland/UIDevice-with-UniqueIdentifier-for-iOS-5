@@ -7,7 +7,7 @@
 //
 
 #import "UIDevice+IdentifierAddition.h"
-#import "NSString+MD5Addition.h"
+#import "NSString+CryptoAddition.h"
 #import "CategoryFix.h"
 
 #include <sys/socket.h> // Per msqr
@@ -85,14 +85,14 @@
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
 
     NSString *stringToHash = [NSString stringWithFormat:@"%@%@",macaddress,bundleIdentifier];
-    NSString *uniqueIdentifier = [stringToHash stringFromMD5];
+    NSString *uniqueIdentifier = [stringToHash stringFromSHA1];
 
     return uniqueIdentifier;
 }
 
 - (NSString *) uniqueGlobalDeviceIdentifier{
     NSString *macaddress = [[UIDevice currentDevice] macaddress];
-    NSString *uniqueIdentifier = [macaddress stringFromMD5];
+    NSString *uniqueIdentifier = [macaddress stringFromSHA1];
 
     return uniqueIdentifier;
 }

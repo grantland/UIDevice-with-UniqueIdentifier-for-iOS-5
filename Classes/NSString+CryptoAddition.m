@@ -1,16 +1,16 @@
 //
-//  NSString+MD5Addition.m
+//  NSString+CryptoAddition.m
 //  UIDeviceAddition
 //
 //  Created by Georg Kitz on 20.08.11.
 //  Copyright 2011 Aurora Apps. All rights reserved.
 //
 
-#import "NSString+MD5Addition.h"
+#import "NSString+CryptoAddition.h"
 #import "CategoryFix.h"
 #import <CommonCrypto/CommonDigest.h>
 
-@implementation NSString (MD5Addition)
+@implementation NSString (Crypto)
 
 - (NSString *) stringFromMD5{
 
@@ -30,5 +30,23 @@
     return [outputString autorelease];
 }
 
+- (NSString *) stringFromSHA1{
+
+    if(self == nil || [self length] == 0)
+        return nil;
+
+    const char *value = [self UTF8String];
+
+    unsigned char outputBuffer[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1(value, strlen(value), outputBuffer);
+
+    NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    for(NSInteger count = 0; count < CC_SHA1_DIGEST_LENGTH; count++){
+        [outputString appendFormat:@"%02x",outputBuffer[count]];
+    }
+
+    return [outputString autorelease];
+}
+
 @end
-FIX_CATEGORY_BUG(NSString_MD5)
+FIX_CATEGORY_BUG(NSString_Cyrpto)

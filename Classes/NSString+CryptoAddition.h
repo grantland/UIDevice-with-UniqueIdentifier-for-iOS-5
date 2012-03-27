@@ -1,5 +1,5 @@
 //
-//  NSString+MD5Addition.h
+//  NSString+CryptoAddition.h
 //  UIDeviceAddition
 //
 //  Created by Georg Kitz on 20.08.11.
@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString(MD5Addition)
+@interface NSString(Crypto)
 
 - (NSString *) stringFromMD5;
+- (NSString *) stringFromSHA1;
 
 @end
