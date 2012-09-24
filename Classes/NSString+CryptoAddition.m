@@ -7,7 +7,6 @@
 //
 
 #import "NSString+CryptoAddition.h"
-#import "CategoryFix.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString (Crypto)
@@ -27,7 +26,11 @@
         [outputString appendFormat:@"%02x",outputBuffer[count]];
     }
 
+#if __has_feature(objc_arc)
+    return outputString;
+#else
     return [outputString autorelease];
+#endif
 }
 
 - (NSString *) stringFromSHA1{
@@ -45,8 +48,11 @@
         [outputString appendFormat:@"%02x",outputBuffer[count]];
     }
 
+#if __has_feature(objc_arc)
+    return outputString;
+#else
     return [outputString autorelease];
+#endif
 }
 
 @end
-FIX_CATEGORY_BUG(NSString_Cyrpto)

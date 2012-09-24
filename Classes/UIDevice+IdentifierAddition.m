@@ -8,7 +8,6 @@
 
 #import "UIDevice+IdentifierAddition.h"
 #import "NSString+CryptoAddition.h"
-#import "CategoryFix.h"
 
 #include <sys/socket.h> // Per msqr
 #include <sys/sysctl.h>
@@ -92,4 +91,3 @@
 }
 
 @end
-FIX_CATEGORY_BUG(UIDevice)
